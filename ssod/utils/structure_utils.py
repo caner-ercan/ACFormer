@@ -1,5 +1,7 @@
 import warnings
-from collections import Counter, Mapping, Sequence
+from collections import Counter
+from collections.abc import Mapping, Sequence
+
 from numbers import Number
 from typing import Dict, List
 
