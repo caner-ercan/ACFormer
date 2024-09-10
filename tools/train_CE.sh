@@ -1,0 +1,2 @@
+
+/usr/bin/python3.8 -m torch.distributed.launch --nproc_per_node=1 /rsrch5/home/trans_mol_path/cercan/code/ACFormer/tools/train.py /rsrch5/home/trans_mol_path/cercan/data/acformer/checkpoints/lizard/ACFormer_Lizard_finetune.py --launcher pytorch ${@:3} --no-validate

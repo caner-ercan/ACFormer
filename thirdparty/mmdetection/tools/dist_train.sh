@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin bash
 
 CONFIG=$1
 GPUS=$2
@@ -8,7 +8,7 @@ PORT=${PORT:-29531}
 MASTER_ADDR=${MASTER_ADDR:-"127.0.0.1"}
 
 PYTHONPATH="$(dirname $0)/..":$PYTHONPATH \
-python -m torch.distributed.launch \
+/usr/bin/python3.8 -m torch.distributed.launch \
     --nnodes=$NNODES \
     --node_rank=$NODE_RANK \
     --master_addr=$MASTER_ADDR \

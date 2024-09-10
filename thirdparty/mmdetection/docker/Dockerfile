@@ -21,3 +21,9 @@ WORKDIR /App/ACFormer/thirdparty/mmdetection
 RUN pip install -e .
 WORKDIR /App/ACFormer/
 RUN pip install -e .
+
+RUN pip install pandas matplotlib opencv-python
+RUN apt-get update && apt-get install -y libtiff5-dev
+RUN pip install libtiff
+RUN sudo chmod -R 777 /usr/local/lib/python3.8/dist-packages/libtiff
+WORKDIR /rsrch5/home/trans_mol_path/cercan/
