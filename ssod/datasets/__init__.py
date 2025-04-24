@@ -7,6 +7,7 @@ from .pseudo_coco import PseudoCocoDataset
 from .samplers import DistributedGroupSemiBalanceSampler
 from .CellDetDataset_Lizard_6Class import CellDetDataset_Lizard_6class
 from .CellDetDataset_CoNSeP_SAHI import CellDetDataset_CoNSeP_SAHI
+from .CellDetDataset_Lizard_5Class_CE import CellDetDataset_Lizard_5class_CE
 
 __all__ = [
     "PseudoCocoDataset",
@@ -15,6 +16,7 @@ __all__ = [
     "SemiDataset",
     "DistributedGroupSemiBalanceSampler",
     "CellDetDataset_Lizard_6class",
-    "CellDetDataset_CoNSeP_SAHI"
+    "CellDetDataset_CoNSeP_SAHI",
+    "CellDetDataset_Lizard_5class_CE"
 ],
 

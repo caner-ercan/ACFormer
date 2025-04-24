@@ -26,7 +26,9 @@ from .custom import CustomDataset
 
 @DATASETS.register_module()
 class CocoDataset_Lizard(CustomDataset):
-    CLASSES = ('BackGround', 'Neutrophil', 'Epithelial', 'Lymphocyte', 'Plasma', 'Connective')
+    # CLASSES = ('BackGround', 'Neutrophil', 'Epithelial', 'Lymphocyte', 'Plasma', 'Connective')
+    CLASSES = ('Lymphocyte', "Plasma", "OtherImmune", "Epithelial", "Stroma")
+
 
     PALETTE = [(220, 20, 60), (119, 11, 32), (0, 0, 142), (0, 0, 230), (10, 10, 10), (200,200,200)]
 

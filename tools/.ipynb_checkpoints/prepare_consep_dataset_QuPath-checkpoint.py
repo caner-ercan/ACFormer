@@ -90,39 +90,30 @@ def gaussian_filter_density(img, points, point_class_map, mat, start_y=0, start_
 def trans_to_coco(patch_save_img_path, qp_input_csv_path, qp_output_json_path):
     global segmentation_id
     imgs_files = os.listdir(patch_save_img_path)
-    imgs_files = [f for f in os.listdir(patch_save_img_path) if not f.startswith('.')]
-
     ann = {
         "info": {
             "description": "BE Dataset",
         },
         "images": [],
         "annotations": [],
-        # "categories": [
-        #     {"supercategory": "Neutrophil", "id": 0, "name": "Neutrophil"},
-        #     {"supercategory": "Epithelial", "id": 1, "name": "Epithelial"},
-        #     {"supercategory": "Lymphocyte", "id": 2, "name": "Lymphocyte"},
-        #     {"supercategory": "Plasma", "id": 3, "name": "Plasma"},
-        #     {"supercategory": "Eosinophil", "id": 4, "name": "Eosinophil"},
-        #     {"supercategory": "Connective", "id": 5, "name": "Connective"}
-        # ]
         "categories": [
-            {"supercategory": "Lymphocyte", "id": 0, "name": "Lymphocyte"},
-            {"supercategory": "Plasma", "id": 1, "name": "Plasma"},
-            {"supercategory": "OtherImmune", "id": 2, "name": "OtherImmune"},
-            {"supercategory": "Epithelial", "id": 3, "name": "Epithelial"},
-            {"supercategory": "Stroma", "id": 4, "name": "Stroma"}
+            {"supercategory": "Neutrophil", "id": 0, "name": "Neutrophil"},
+            {"supercategory": "Epithelial", "id": 1, "name": "Epithelial"},
+            {"supercategory": "Lymphocyte", "id": 2, "name": "Lymphocyte"},
+            {"supercategory": "Plasma", "id": 3, "name": "Plasma"},
+            {"supercategory": "Eosinophil", "id": 4, "name": "Eosinophil"},
+            {"supercategory": "Connective", "id": 5, "name": "Connective"}
         ]
     }
     cell_type_dict = {
-    'Lymphocyte': 0,
-    'Plasma': 1,
-    'OtherImmune': 2,
-    'Epithelial': 3,
-    'Stroma': 4
+    'neutrophil': 0,
+    'epithelium': 1,
+    'lymphocyte': 2,
+    'plasma': 3,
+    'eosinophil': 4,
+    'stroma': 5
     }
     for imgid, image in enumerate(imgs_files):
-        print(image)
         img_shape = mmcv.imread(os.path.join(patch_save_img_path, image)).shape
         img_info = {
             "file_name": image,
@@ -288,8 +279,6 @@ def valid():
     coco.showAnns(img_anns)
     plt.show()
 
-
-
 def split_rois_csv(qp_input_img_path,qp_input_csv_path,output_folder):
     img_list = os.listdir(qp_input_img_path)
     img_list = [img[:5] for img in img_list]  # Take the first 5 characters of each filename
@@ -322,8 +311,8 @@ def split_rois_csv(qp_input_img_path,qp_input_csv_path,output_folder):
 if __name__ == '__main__':
     mode = ['Train', 'train']
 
-    qp_input_img_path = "/rsrch5/home/trans_mol_path/cercan/BE_master/2.intermediate/2.2.cell/training/qp_proj/finetuning/roi" #coco_save_img_path
-    qp_input_csv_path = "/rsrch5/home/trans_mol_path/cercan/BE_master/2.intermediate/2.2.cell/training/qp_proj/finetuning/corrected_point" #coco_save_gt_path
+    qp_input_img_path = "/rsrch5/home/trans_mol_path/cercan/data/BE/cell_detect/acformer/finetune/qpproj_batch2/finetune_annotations/tiles" #coco_save_img_path
+    qp_input_csv_path = "/rsrch5/home/trans_mol_path/cercan/data/BE/cell_detect/acformer/finetune/qpproj_batch2/finetune_annotations/corrected_point" #coco_save_gt_path
     # qp_output_json_path = "/rsrch5/home/trans_mol_path/cercan/data/BE/cell_detect/acformer/finetune/qpproj/finetune_annot.json" #coco_save_json_path
 
     # coco_save_img_path = "/data2/huangjunjia/coco/COCO_CoNSeP_256/CoNSeP_{}/".format(mode[0])
@@ -341,11 +330,11 @@ if __name__ == '__main__':
     # os.makedirs(coco_save_img_path, exist_ok=True)
 
     # classes_max_indx = 3
-    output_folder="/rsrch5/home/trans_mol_path/cercan/BE_master/2.intermediate/2.2.cell/training/qp_proj/finetuning"
-    # split_rois_csv(qp_input_img_path,qp_input_csv_path,output_folder)
+    output_folder="/rsrch5/home/trans_mol_path/cercan/data/BE/cell_detect/acformer/finetune/qpproj_batch2/finetuning"
+    split_rois_csv(qp_input_img_path,qp_input_csv_path,output_folder)
     # trans_to_patch()
     for dataset_type in ["training", "validation"]:
-        patch_save_img_path_split = os.path.join(output_folder,dataset_type,"roi")
+        patch_save_img_path_split = os.path.join(output_folder,dataset_type,"tile")
         qp_input_csv_path_split = os.path.join(output_folder,dataset_type,"csv")
         qp_output_json_path_split = os.path.join(output_folder,dataset_type,"finetune_annot.json")
         trans_to_coco(patch_save_img_path_split , qp_input_csv_path_split , qp_output_json_path_split )

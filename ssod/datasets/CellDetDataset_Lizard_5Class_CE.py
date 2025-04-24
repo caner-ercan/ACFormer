@@ -25,11 +25,11 @@ import re
 
 
 @DATASETS.register_module()
-class CellDetDataset_Lizard_6class(CustomDataset):
+class CellDetDataset_Lizard_5class_CE(CustomDataset):
     # CLASSES = ('Neutrophil', "Epithelial", "Lymphocyte", "Plasma", "Eosinophil", "Connective")
     CLASSES = ('Lymphocyte', "Plasma", "OtherImmune", "Epithelial", "Stroma")
 
-    PALETTE = [[255, 0, 0], [0, 255, 0], [0, 0, 255], [100, 100, 100], [200, 200, 200], [50, 50, 50]]
+    PALETTE = [[255, 0, 0], [0, 255, 0], [0, 0, 255], [100, 100, 100], [200, 200, 200]]
 
     def load_annotations(self, ann_file):
         """Load annotation from COCO style annotation file.

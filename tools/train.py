@@ -22,7 +22,7 @@ from ssod.utils import patch_config
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Train a detector")
-    parser.add_argument("config", help="train config file path")
+    parser.add_argument("--config", help="train config file path")
     parser.add_argument("--work-dir", default=None, help="the dir to save logs and models")
     parser.add_argument("--resume-from", help="the checkpoint file to resume from")
     parser.add_argument(
@@ -182,7 +182,9 @@ def main():
             mmdet_version=__version__ + get_git_hash()[:7], CLASSES=datasets[0].CLASSES
         )
     # add an attribute for visualization convenience
-    model.CLASSES = datasets[0].CLASSES
+    # model.CLASSES = datasets[0].CLASSES
+    model.CLASSES = ('Lymphocyte', "Plasma", "OtherImmune", "Epithelial", "Stroma")
+
     train_detector(
         model,
         datasets,
